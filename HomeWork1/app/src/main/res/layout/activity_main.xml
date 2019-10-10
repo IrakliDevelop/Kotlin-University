@@ -14,7 +14,7 @@
         android:hint="enter a number"
         android:importantForAutofill="no"
         android:inputType="number"
-        tools:ignore="LabelFor"
+        tools:ignore="LabelFor,MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -28,7 +28,7 @@
         android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/input1"
-        tools:ignore="LabelFor">
+        tools:ignore="LabelFor,MissingConstraints">
     </EditText>
 
 
@@ -38,36 +38,30 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
 
         <Button
             android:id="@+id/sumButton"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
-            android:text="SUM"
-
-             />
+            android:text="SUM" />
 
         <Button
             android:id="@+id/subButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SUBTRACT"
-             />
+            android:text="SUBTRACT" />
         <Button
             android:id="@+id/multiplyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MULTIPLY"
-            />
+            android:text="MULTIPLY" />
         <Button
             android:id="@+id/divideButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DIVIDE"
- />
+            android:text="DIVIDE"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
