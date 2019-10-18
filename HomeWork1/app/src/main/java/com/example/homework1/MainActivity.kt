@@ -3,10 +3,8 @@ package com.example.homework1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,26 +30,34 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun calculate(): Int {
+    private fun sum(): String {
         val input1 = findViewById<EditText>(R.id.input1)
         val input2 = findViewById<EditText>(R.id.input2)
-        return input1.run { text.toString().toInt() } + input2.run { text.toString().toInt() }
+        val result = input1.run { text.toString().toInt() } + input2.run { text.toString().toInt() }
+        return "${input1.text} + ${input2.text} = $result"
     }
-    private fun subtract(): Int {
+    private fun subtract(): String {
         val input1 = findViewById<EditText>(R.id.input1)
         val input2 = findViewById<EditText>(R.id.input2)
-        return input1.run { text.toString().toInt() } - input2.run { text.toString().toInt()}
+        val result = input1.run { text.toString().toInt() } - input2.run { text.toString().toInt()}
+        return "${input1.text} - ${input2.text} = $result"
     }
-    private fun multiply(): Int  {
+    private fun multiply(): String  {
         val input1 = findViewById<EditText>(R.id.input1)
         val input2 = findViewById<EditText>(R.id.input2)
-        return input1.run { text.toString().toInt() } * input2.run { text.toString().toInt()}
+        val result = input1.run { text.toString().toInt() } * input2.run { text.toString().toInt()}
+        return "${input1.text} * ${input2.text} = $result"
     }
-    private fun divide(): Any {
+    private fun divide(): String {
         val input1 = findViewById<EditText>(R.id.input1)
         val input2 = findViewById<EditText>(R.id.input2)
         return try {
-            input1.run { text.toString().toFloat() } / input2.run { text.toString().toFloat()}
+            if (input2.run { text.toString().toInt() } == 0) {
+                val exception: ArithmeticException = ArithmeticException("Can't Divide By Zero")
+                throw exception
+            }
+            val result = input1.run { text.toString().toFloat() } / input2.run { text.toString().toFloat()}
+            "${input1.text} / ${input2.text} = $result"
         } catch (e: ArithmeticException) {
             "Can't divide by zero"
         }
@@ -60,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, SecondActivity::class.java)
         var result: Any
         when (operand) {
-            "sum" -> result = calculate()
+            "sum" -> result = sum()
             "subtract" -> result = subtract()
             "multiply" -> result = multiply()
             else -> result = divide()
