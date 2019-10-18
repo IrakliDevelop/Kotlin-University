@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="secondActivityBackground">#00574B</color>
+    <color name="resultColor">#FFF</color>
+    <color name="buttonTextColor">#FFF</color>
+    <color name="buttonColor">#00574B</color>
+    <color name="calculatorMain">#D81B60</color>
+    <color name="hintColor">#FF979797</color>
+    <color name="inputText">#D81B60</color>
 </resources>
