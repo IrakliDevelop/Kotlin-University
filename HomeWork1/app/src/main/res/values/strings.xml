@@ -2,4 +2,9 @@
     <string name="app_name">HomeWork1</string>
     <string name="number_1">Number 1</string>
     <string name="number_2">Number 2</string>
+    <string name="calculator">Calculator</string>
+    <string name="sum">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">*</string>
+    <string name="divide">/</string>
 </resources>

@@ -12,11 +12,10 @@
 
 
 
-    <!--TODO: move text to resources -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calculator"
+        android:text="@string/calculator"
         android:textAlignment="center"
         android:layout_marginBottom="50dp"
         />
@@ -63,13 +62,13 @@
             android:id="@+id/sumButton"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
-            android:text="SUM" />
+            android:text="@string/sum" />
 
         <Button
             android:id="@+id/subButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SUBTRACT" />
+            android:text="@string/subtract" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,12 +81,12 @@
             android:id="@+id/multiplyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MULTIPLY" />
+            android:text="@string/multiply" />
         <Button
             android:id="@+id/divideButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DIVIDE"/>
+            android:text="@string/divide"/>
 
     </LinearLayout>
 
