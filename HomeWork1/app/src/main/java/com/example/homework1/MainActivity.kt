@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("result", "$result")
             startActivity(intent)
         } catch (e: EmptyInputException) {
-            Toast.makeText(this,"Please fill both inputs",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,R.string.toastText,Toast.LENGTH_LONG).show()
         }
     }
 }

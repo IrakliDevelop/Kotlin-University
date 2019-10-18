@@ -3,6 +3,7 @@
     <string name="number_1">Number 1</string>
     <string name="number_2">Number 2</string>
     <string name="calculator">Simple Calculator</string>
+    <string name="toastText">Please enter both numbers</string>
     <string name="sum">+</string>
     <string name="subtract">-</string>
     <string name="multiply">*</string>
