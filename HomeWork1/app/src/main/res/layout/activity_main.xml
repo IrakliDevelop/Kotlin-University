@@ -38,6 +38,7 @@
         android:importantForAutofill="no"
         android:inputType="number"
         android:textSize="18sp"
+        android:textColor="@color/inputText"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         tools:ignore="LabelFor,MissingConstraints"
@@ -54,6 +55,7 @@
         android:importantForAutofill="no"
         android:inputType="number"
         android:textSize="18sp"
+        android:textColor="@color/inputText"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         app:layout_constraintStart_toEndOf="@+id/input1">
