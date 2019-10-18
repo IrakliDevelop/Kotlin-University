@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,9 +31,15 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun sum(): String {
+    private fun sum(): Any {
         val input1 = findViewById<EditText>(R.id.input1)
         val input2 = findViewById<EditText>(R.id.input2)
+
+        if(input1.text.isEmpty() || input2.text.isEmpty()){
+            Toast.makeText(this,"asdf",Toast.LENGTH_LONG).show()
+            return 0
+        }
+
         val result = input1.run { text.toString().toInt() } + input2.run { text.toString().toInt() }
         return "${input1.text} + ${input2.text} = $result"
     }
