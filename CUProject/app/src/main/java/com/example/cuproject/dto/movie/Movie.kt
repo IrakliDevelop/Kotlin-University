@@ -1,5 +1,9 @@
 package com.example.cuproject.dto.movie
 
+data class MovieResponse(
+    val movies: List<Movie>
+)
+
 data class Movie(
     val id: Number,
     val title: String,
@@ -7,7 +11,7 @@ data class Movie(
     val language: String,
     val seasons: Number,
     val imageUrl: String,
-    val cast: Cast)
+    val cast: List<Cast>)
 
 data class Cast(
     val id: Number,
