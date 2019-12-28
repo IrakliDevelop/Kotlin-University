@@ -12,23 +12,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="327dp" />
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/movieListRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/movieListRecyclerView"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width = "match_parent"
-        android:layout_height = "match_parent"
-        android:orientation = "vertical">
-        <ListView
-            android:id = "@+id/movieList"
-            android:layout_width = "wrap_content"
-            android:layout_height = "match_parent"
-            android:divider = "#000"
-            android:dividerHeight = "1dp"
-            android:footerDividersEnabled = "false"
-            android:headerDividersEnabled = "false"/>
-    </LinearLayout>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieListRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
