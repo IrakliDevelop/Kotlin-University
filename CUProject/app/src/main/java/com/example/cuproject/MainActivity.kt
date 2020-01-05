@@ -1,5 +1,6 @@
 package com.example.cuproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,11 +12,15 @@ import com.example.cuproject.dto.movie.Movie
 import com.example.cuproject.dto.movie.MovieResponse
 import com.example.cuproject.services.ApiInterface
 import com.example.cuproject.services.ApiUtils
+import com.example.cuproject.utils.OnItemClickListener
 import com.example.cuproject.utils.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.gson.Gson
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,11 +54,28 @@ class MainActivity : AppCompatActivity() {
                 spinner.visibility = View.GONE
                 data.value = response.body()!!.movies
                 movieList = data.value!!
-                // TODO: logic
+
+                // just logging response
                 Log.d("retrofit", "success")
                 Log.d("data", "${data.value}")
-                Log.d("list", "${movieList?.get(0)?.cast?.get(0)}")
-                movieListRecyclerView.adapter = RecyclerAdapter(movieList)
+
+                // inject data to recycler view and handle click event
+                val adapter = RecyclerAdapter(movieList)
+
+                movieListRecyclerView.adapter = adapter
+                adapter.mOnItemClickListener = object : OnItemClickListener {
+                    override fun onItemClick(index: Int) {
+                        Log.d("index", "$index")
+                        Log.d("Movie", "${movieList[index]}")
+
+                        val selectedMovie = movieList[index]
+
+                        val intent = Intent(this@MainActivity, MovieDetails::class.java)
+                        intent.putExtra("movie", Gson().toJson(selectedMovie))
+                        startActivity(intent)
+                    }
+
+                }
             }
         })
 

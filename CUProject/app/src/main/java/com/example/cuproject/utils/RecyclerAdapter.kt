@@ -1,17 +1,18 @@
 package com.example.cuproject.utils
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cuproject.R
 import com.example.cuproject.dto.movie.Movie
 import com.squareup.picasso.Picasso
+
+interface  OnItemClickListener {
+    fun onItemClick(index: Int)
+}
 
 class RecyclerAdapter(private val movies: List<Movie>
 ) : RecyclerView.Adapter<RecyclerAdapter.MovieHolder>()  {
@@ -30,8 +31,10 @@ class RecyclerAdapter(private val movies: List<Movie>
         holder.movie = movies[position]
     }
 
+    var mOnItemClickListener: OnItemClickListener? = null
+
     //1
-    class MovieHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class MovieHolder(v: View) : RecyclerView.ViewHolder(v) {
         //2
         private var view: View = v
         var movie: Movie? = null
@@ -41,14 +44,11 @@ class RecyclerAdapter(private val movies: List<Movie>
         //3
         init {
 
-            v.setOnClickListener(this)
+            v.setOnClickListener{
+                mOnItemClickListener?.onItemClick(adapterPosition)
+            }
         }
 
-        //4
-        override fun onClick(v: View) {
-            Log.d("movie", this.movie.toString())
-            Log.d("RecyclerView", "CLICK!")
-        }
 
 //        companion object {
 //            //5
