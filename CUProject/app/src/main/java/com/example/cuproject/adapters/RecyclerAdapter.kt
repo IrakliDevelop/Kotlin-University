@@ -1,4 +1,4 @@
-package com.example.cuproject.utils
+package com.example.cuproject.adapters
 
 import android.view.LayoutInflater
 import android.view.View

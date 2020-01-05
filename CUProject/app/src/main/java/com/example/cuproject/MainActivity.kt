@@ -12,8 +12,8 @@ import com.example.cuproject.dto.movie.Movie
 import com.example.cuproject.dto.movie.MovieResponse
 import com.example.cuproject.services.ApiInterface
 import com.example.cuproject.services.ApiUtils
-import com.example.cuproject.utils.OnItemClickListener
-import com.example.cuproject.utils.RecyclerAdapter
+import com.example.cuproject.adapters.OnItemClickListener
+import com.example.cuproject.adapters.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
