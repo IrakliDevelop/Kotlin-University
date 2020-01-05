@@ -11,6 +11,7 @@ import com.example.cuproject.dto.movie.Movie
 import com.example.cuproject.dto.movie.MovieResponse
 import com.example.cuproject.services.ApiInterface
 import com.example.cuproject.services.ApiUtils
+import com.example.cuproject.utils.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         val fetch = apiService.fetchAll()
         val data = MutableLiveData<List<Movie>>()
-        var movieList: List<Movie>? = null
+        var movieList: List<Movie>
 
         fetch.enqueue(object : Callback<MovieResponse> {
             override fun onFailure(call: Call<MovieResponse>?, t: Throwable?) {
@@ -47,11 +48,12 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 spinner.visibility = View.GONE
                 data.value = response.body()!!.movies
-                movieList = data.value
+                movieList = data.value!!
                 // TODO: logic
                 Log.d("retrofit", "success")
                 Log.d("data", "${data.value}")
                 Log.d("list", "${movieList?.get(0)?.cast?.get(0)}")
+                movieListRecyclerView.adapter = RecyclerAdapter(movieList)
             }
         })
 
