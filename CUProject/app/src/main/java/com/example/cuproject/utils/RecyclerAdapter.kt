@@ -26,7 +26,7 @@ class RecyclerAdapter(private val movies: List<Movie>
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         Picasso.get().load(movies[position].imageUrl).into(holder.movieImage)
-        holder.movieTitle?.text = movies[position].title
+        holder.movieTitle.text = movies[position].title
     }
 
     //1
@@ -35,7 +35,7 @@ class RecyclerAdapter(private val movies: List<Movie>
         private var view: View = v
         private var movie: Movie? = null
         var movieImage = view.findViewById<ImageView>(R.id.movieImage)!!
-        var movieTitle = view.findViewById<TextView>(R.id.movieTitle)
+        var movieTitle = view.findViewById<TextView>(R.id.movieTitle)!!
 
         //3
         init {
