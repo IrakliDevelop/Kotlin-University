@@ -6,4 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MovieDetails">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/info_tab"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabMode="fixed" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_main"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_tab" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
