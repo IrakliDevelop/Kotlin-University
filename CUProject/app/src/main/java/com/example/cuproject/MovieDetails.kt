@@ -17,9 +17,10 @@ class MovieDetails : AppCompatActivity() {
         val movie = Gson().fromJson(intent.getStringExtra("movie"), Movie::class.java)
         Log.d("movieInSecondActivity", "$movie")
 
-        val fragmentAdapter = PagerAdapter(supportFragmentManager)
+        val fragmentAdapter = PagerAdapter(supportFragmentManager, movie)
         viewpager_main.adapter = fragmentAdapter
 
         info_tab.setupWithViewPager(viewpager_main)
+
     }
 }
