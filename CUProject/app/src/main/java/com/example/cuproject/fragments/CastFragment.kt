@@ -1,23 +1,27 @@
 package com.example.cuproject.fragments
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.cuproject.R
+import com.example.cuproject.adapters.CastRecyclerAdapter
 import com.example.cuproject.dto.movie.Movie
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import org.json.JSONObject
+import kotlinx.android.synthetic.main.fragment_cast.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class CastFragment(private val movie: Movie) : Fragment() {
+
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: CastRecyclerAdapter
 
     companion object {
 
@@ -33,10 +37,16 @@ class CastFragment(private val movie: Movie) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val movieCast = movie.cast
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cast, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        linearLayoutManager = LinearLayoutManager(view.context)
+        adapter = CastRecyclerAdapter(movie.cast)
+
+        castListRecyclerView.layoutManager = linearLayoutManager
+        castListRecyclerView.adapter = adapter
+    }
 
 }
