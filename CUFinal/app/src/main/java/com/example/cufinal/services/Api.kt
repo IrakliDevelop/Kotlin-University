@@ -1,5 +1,6 @@
 package com.example.cufinal.services
 
+import com.example.cufinal.dto.weather.WeatherResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -10,12 +11,14 @@ import java.util.concurrent.TimeUnit
 
 interface ApiInterface {
 
-    @GET("data/2.5/forecast?q=Tbilisi&APPID=a5ee34b7ab1ff3b8a71ae75183a1735e")
-    fun fetchAll(): Call<*> // TODO: create models
+    @GET("/data/2.5/forecast?q=Tbilisi&APPID=a5ee34b7ab1ff3b8a71ae75183a1735e")
+    fun fetchAll(): Call<WeatherResponse>
 }
 
 object ApiUtils {
     private const val BASE_URL = "https://api.openweathermap.org"
+
+    val apiService: ApiInterface get() = RetrofitClient.getClient(BASE_URL)!!.create(ApiInterface::class.java)
 }
 
 object RetrofitClient {
