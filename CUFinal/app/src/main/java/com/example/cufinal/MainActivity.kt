@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import com.example.cufinal.dto.weather.WeatherResponse
 import com.example.cufinal.services.ApiInterface
 import com.example.cufinal.services.ApiUtils
+import com.example.cufinal.utils.Util
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +42,26 @@ class MainActivity : AppCompatActivity() {
                 Log.d("retrofit", "success")
                 loading.visibility = View.GONE
                 Log.d("data", "${response.body()}")
-            }
-        })
+
+                data.value = response.body()!!
+                weatherResponse = data.value!!
+
+                // set country and city
+                val city = weatherResponse.city.name
+                val countryCode = weatherResponse.city.country
+                val country = Locale("", countryCode).displayCountry
+                findViewById<TextView>(R.id.city).text = city
+                findViewById<TextView>(R.id.country).text = country
+
+                // set current temperature
+                val temperatureInKelvin = weatherResponse.list[0].mainInfo.temperature
+                val temperature = Util.kelvinToCelsius(temperatureInKelvin)
+                // TODO: display current temperature
+
+
+                // set current weather
+                val weatherIcon = weatherResponse.list[0].weather[0].icon
+                // TODO: assign weather icon with it's code
+            } })
     }
 }
