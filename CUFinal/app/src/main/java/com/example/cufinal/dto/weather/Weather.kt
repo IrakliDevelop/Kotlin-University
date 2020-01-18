@@ -57,7 +57,7 @@ data class WeatherInfo(
 )
 
 data class MainInfo(
-    @SerializedName("temperature")
+    @SerializedName("temp")
     val temperature: Double,
     @SerializedName("feels_like")
     val feels_like: Double,
