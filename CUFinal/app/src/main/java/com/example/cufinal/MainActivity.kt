@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
@@ -56,12 +57,17 @@ class MainActivity : AppCompatActivity() {
                 // set current temperature
                 val temperatureInKelvin = weatherResponse.list[0].mainInfo.temperature
                 val temperature = Util.kelvinToCelsius(temperatureInKelvin)
-                // TODO: display current temperature
+                findViewById<TextView>(R.id.currentTemperature).text = "$temperature°C"
 
 
                 // set current weather
                 val weatherIcon = weatherResponse.list[0].weather[0].icon
-                // TODO: assign weather icon with it's code
+                val currentWeatherIcon = findViewById<ImageView>(R.id.currentWeatherIcon)
+                currentWeatherIcon.setImageResource(Util.getIconFromCode(weatherIcon))
+
+                // set current weather description
+                val currentWeatherDescription = weatherResponse.list[0].weather[0].description
+                findViewById<TextView>(R.id.currentWeatherDescription).text = currentWeatherDescription
             } })
     }
 }
