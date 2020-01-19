@@ -49,7 +49,7 @@ object Util {
     fun getHourFromDate(date: Date): String {
         val cal = Calendar.getInstance()
         cal.time = date
-        return "${cal.get(Calendar.HOUR_OF_DAY)}:00"
+        return "${cal.get(Calendar.HOUR_OF_DAY)}"
     }
 
 }

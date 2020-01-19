@@ -26,7 +26,7 @@ class WeatherNextHoursAdapter(
     override fun onBindViewHolder(holder: WeatherHolder, position: Int) {
         holder.temperature.text = "${Util.getAndFormatTemperature(weatherInfo, position )}°C"
         holder.temperatureIcon.setImageResource(Util.getIconFromCode(Util.getIconCode(weatherInfo, position)))
-        holder.time.text = Util.getHourFromDate(Util.fromEpochToDate(weatherInfo[position].date))
+        holder.time.text = "${Util.getHourFromDate(Util.fromEpochToDate(weatherInfo[position].date))}:00"
     }
 
     override fun getItemCount() = weatherInfo.size
