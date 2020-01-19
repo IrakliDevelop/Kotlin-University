@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cufinal.adapters.WeatherNextHoursAdapter
+import com.example.cufinal.dto.weather.WeatherInfo
 import com.example.cufinal.dto.weather.WeatherResponse
 import com.example.cufinal.services.ApiInterface
 import com.example.cufinal.services.ApiUtils
@@ -50,10 +51,7 @@ class MainActivity : AppCompatActivity() {
                 // TODO: notify user
             }
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
-                Log.d("retrofit", "success")
                 loading.visibility = View.GONE
-                Log.d("data", "${response.body()}")
-
                 data.value = response.body()!!
                 weatherResponse = data.value!!
 
@@ -68,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                 val temperature = Util.getAndFormatTemperature(weatherResponse.list, 0)
                 findViewById<TextView>(R.id.currentTemperature).text = "$temperature°C"
 
-
                 // set current weather
                 val weatherIcon = Util.getIconCode(weatherResponse.list, 0)
                 val currentWeatherIcon = findViewById<ImageView>(R.id.currentWeatherIcon)
@@ -77,12 +74,30 @@ class MainActivity : AppCompatActivity() {
                 // set current weather description
                 val currentWeatherDescription = weatherResponse.list[0].weather[0].description
                 findViewById<TextView>(R.id.currentWeatherDescription).text = currentWeatherDescription
-                Log.d("time", fromEpochToDate(weatherResponse.list[0].date).toString())
 
+
+                // set next 15 hours
                 val weatherNextHoursList = weatherResponse.list.slice(1..5)
-                Log.d("aaaaa", "${weatherNextHoursList.size}")
                 val adapter = WeatherNextHoursAdapter(weatherNextHoursList)
                 weatherNextHoursRecyclerView.adapter = adapter
+
+                val nextFiveDaysMutable: MutableList<WeatherInfo> = arrayListOf()
+                val nextFiveNightsMutable: MutableList<WeatherInfo> = arrayListOf()
+
+                weatherResponse.list.forEach { element: WeatherInfo ->
+                    run {
+                        val hour = Util.getHourFromDate(fromEpochToDate(element.date)).toInt()
+                        // day
+                        if (hour in 11..13) {
+                            nextFiveDaysMutable.add(element)
+                        }
+                        if (hour in 20..23) {
+                            nextFiveNightsMutable.add(element)
+                        }
+                    }
+                }
+                val nextFiveDays: List<WeatherInfo> = nextFiveDaysMutable.toList()
+                val nextFiveNights: List<WeatherInfo> = nextFiveNightsMutable.toList()
 
 
             } })
