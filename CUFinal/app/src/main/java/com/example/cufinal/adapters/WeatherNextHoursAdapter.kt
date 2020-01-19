@@ -35,6 +35,6 @@ class WeatherNextHoursAdapter(
         private val view = v
         var temperature = view.findViewById<TextView>(R.id.temperature)!!
         var temperatureIcon = view.findViewById<ImageView>(R.id.temperatureIcon)!!
-        var time = view.findViewById<TextView>(R.id.time)
+        var time = view.findViewById<TextView>(R.id.time)!!
     }
 }
