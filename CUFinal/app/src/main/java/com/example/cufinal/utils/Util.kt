@@ -1,11 +1,18 @@
 package com.example.cufinal.utils
 
+import android.os.Build
 import com.example.cufinal.R
+import com.example.cufinal.dto.weather.WeatherInfo
+import com.example.cufinal.dto.weather.WeatherResponse
+import java.util.*
 import kotlin.math.roundToInt
 
 object Util {
-    fun kelvinToCelsius(temperature: Double): Int {
+    private fun kelvinToCelsius(temperature: Double): Int {
         return (temperature - 273.15).roundToInt()
+    }
+    fun getAndFormatTemperature(weatherInfo: List<WeatherInfo>, index: Int): Int {
+        return this.kelvinToCelsius(weatherInfo[index].mainInfo.temperature)
     }
 
     fun getIconFromCode(iconCode: String): Int {
@@ -30,4 +37,19 @@ object Util {
             else -> R.drawable.wind
         }
     }
+
+    fun getIconCode(weatherInfo: List<WeatherInfo>, index: Int): String {
+        return weatherInfo[index].weather[0].icon
+    }
+
+    fun fromEpochToDate(timestamp: Number): Date {
+        return Date(timestamp.toLong() * (1000.toLong()))
+    }
+
+    fun getHourFromDate(date: Date): String {
+        val cal = Calendar.getInstance()
+        cal.time = date
+        return "${cal.get(Calendar.HOUR_OF_DAY)}:00"
+    }
+
 }

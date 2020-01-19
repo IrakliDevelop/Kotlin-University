@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CUFinal</string>
+    <string name="weather_next_hours">Weather Next Hours</string>
 </resources>

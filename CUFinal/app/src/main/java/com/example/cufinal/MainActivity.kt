@@ -8,10 +8,14 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cufinal.adapters.WeatherNextHoursAdapter
 import com.example.cufinal.dto.weather.WeatherResponse
 import com.example.cufinal.services.ApiInterface
 import com.example.cufinal.services.ApiUtils
 import com.example.cufinal.utils.Util
+import com.example.cufinal.utils.Util.fromEpochToDate
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -19,11 +23,17 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var apiService: ApiInterface? = null
         val loading: ProgressBar = findViewById(R.id.loading)
+
+        // manage layout for adapter
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        weatherNextHoursRecyclerView.layoutManager = linearLayoutManager
 
         loading.visibility = View.VISIBLE
 
@@ -55,19 +65,26 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.country).text = country
 
                 // set current temperature
-                val temperatureInKelvin = weatherResponse.list[0].mainInfo.temperature
-                val temperature = Util.kelvinToCelsius(temperatureInKelvin)
+                val temperature = Util.getAndFormatTemperature(weatherResponse.list, 0)
                 findViewById<TextView>(R.id.currentTemperature).text = "$temperature°C"
 
 
                 // set current weather
-                val weatherIcon = weatherResponse.list[0].weather[0].icon
+                val weatherIcon = Util.getIconCode(weatherResponse.list, 0)
                 val currentWeatherIcon = findViewById<ImageView>(R.id.currentWeatherIcon)
                 currentWeatherIcon.setImageResource(Util.getIconFromCode(weatherIcon))
 
                 // set current weather description
                 val currentWeatherDescription = weatherResponse.list[0].weather[0].description
                 findViewById<TextView>(R.id.currentWeatherDescription).text = currentWeatherDescription
+                Log.d("time", fromEpochToDate(weatherResponse.list[0].date).toString())
+
+                val weatherNextHoursList = weatherResponse.list.slice(1..5)
+                Log.d("aaaaa", "${weatherNextHoursList.size}")
+                val adapter = WeatherNextHoursAdapter(weatherNextHoursList)
+                weatherNextHoursRecyclerView.adapter = adapter
+
+
             } })
     }
 }
