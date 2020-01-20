@@ -4,6 +4,7 @@ import android.os.Build
 import com.example.cufinal.R
 import com.example.cufinal.dto.weather.WeatherInfo
 import com.example.cufinal.dto.weather.WeatherResponse
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -44,6 +45,10 @@ object Util {
 
     fun fromEpochToDate(timestamp: Number): Date {
         return Date(timestamp.toLong() * (1000.toLong()))
+    }
+
+    fun getDayAndMonth(date: Date): String {
+        return SimpleDateFormat("dd MMMM", Locale.ENGLISH).format(date)
     }
 
     fun getHourFromDate(date: Date): String {

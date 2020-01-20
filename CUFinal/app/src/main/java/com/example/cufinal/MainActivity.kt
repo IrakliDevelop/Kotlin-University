@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cufinal.adapters.WeatherNextFiveDaysAdapter
 import com.example.cufinal.adapters.WeatherNextHoursAdapter
 import com.example.cufinal.dto.weather.WeatherInfo
 import com.example.cufinal.dto.weather.WeatherResponse
@@ -25,6 +26,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var linearLayoutManagerForNextDaysView: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +38,15 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         weatherNextHoursRecyclerView.layoutManager = linearLayoutManager
 
+        // layout for second adapter
+        linearLayoutManagerForNextDaysView = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        weatherNextFiveDaysRecyclerView.layoutManager = linearLayoutManagerForNextDaysView
+
         loading.visibility = View.VISIBLE
 
         apiService = ApiUtils.apiService
-
         val fetch = apiService.fetchAll()
         val data = MutableLiveData<WeatherResponse>()
-
         var weatherResponse: WeatherResponse
 
         fetch.enqueue(object: Callback<WeatherResponse> {
@@ -81,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 val adapter = WeatherNextHoursAdapter(weatherNextHoursList)
                 weatherNextHoursRecyclerView.adapter = adapter
 
+                // next 5 days
                 val nextFiveDaysMutable: MutableList<WeatherInfo> = arrayListOf()
                 val nextFiveNightsMutable: MutableList<WeatherInfo> = arrayListOf()
 
@@ -99,7 +104,8 @@ class MainActivity : AppCompatActivity() {
                 val nextFiveDays: List<WeatherInfo> = nextFiveDaysMutable.toList()
                 val nextFiveNights: List<WeatherInfo> = nextFiveNightsMutable.toList()
 
-
+                val nextFiveDaysAdapter = WeatherNextFiveDaysAdapter(nextFiveDays, nextFiveNights)
+                weatherNextFiveDaysRecyclerView.adapter = nextFiveDaysAdapter
             } })
     }
 }

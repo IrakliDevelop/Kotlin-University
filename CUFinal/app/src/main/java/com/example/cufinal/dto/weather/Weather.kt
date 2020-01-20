@@ -105,3 +105,9 @@ data class Sys(
     @SerializedName("pod")
     val pod: String
 )
+
+// this class is needed for recycler view of next five days and nights
+data class WeatherFull(
+    val days: List<WeatherInfo>,
+    val nights: List<WeatherInfo>
+)

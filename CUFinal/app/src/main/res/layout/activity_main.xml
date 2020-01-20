@@ -86,12 +86,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:gravity="start"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -118,5 +119,65 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/weatherNextFiveDays"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="start"
+        android:text="@string/weather_next_five_days"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/loading"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/dateDayNight"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/loading"
+        app:layout_constraintTop_toBottomOf="@+id/weatherNextFiveDays">
+        <TextView
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_marginEnd="100dp"
+            android:text="@string/date"
+             />
+        <TextView
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_marginEnd="100dp"
+            android:text="@string/day"
+            />
+        <TextView
+            style="@style/TextColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/night"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#ffffff"
+        app:layout_constraintStart_toStartOf="@+id/loading"
+        app:layout_constraintTop_toBottomOf="@+id/dateDayNight" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/weatherNextFiveDaysRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        tools:layout_editor_absoluteX="7dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
